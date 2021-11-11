@@ -41,7 +41,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     const options = [];
     if (metadata) {
       for (let key in metadata) {
-        let option = metadata[key];
+        let option: any = metadata[key];
         if (option) {
           options.push(`${key}:'${option}'`);
         }
