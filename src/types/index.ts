@@ -24,10 +24,11 @@ export interface PayStackProps {
   billingName?: string;
   handleWebViewMessage?: (string: string) => void;
   onCancel: (Response: Response) => void;
-  onSuccess: (SuccessResponse:SuccessResponse) => void;
+  onSuccess: (SuccessResponse: SuccessResponse) => void;
   autoStart?: boolean;
   activityIndicatorColor?: string;
   ref: React.ReactElement;
+  metadata?: object;
 }
 
 export interface PayStackRef {

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import { useState, useEffect, forwardRef, useRef, useImperativeHandle } from 'react';
 import { Modal, View, ActivityIndicator, SafeAreaView } from 'react-native';
 import { WebView, WebViewNavigation } from 'react-native-webview';
@@ -24,17 +24,31 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
+    metadata = null,
   },
   ref,
 ) => {
   const [isLoading, setisLoading] = useState(true);
   const [showModal, setshowModal] = useState(false);
+  const [mdata, setMetadata] = useState('');
   const webView = useRef(null);
 
   useEffect(() => {
     autoStartCheck();
   }, []);
 
+  useEffect(() => {
+    const options = [];
+    if (metadata) {
+      for (let key in metadata) {
+        let option = metadata[key];
+        if (option) {
+          options.push(`${key}:'${option}'`);
+        }
+      }
+      setMetadata(options.join(','));
+    }
+  }, [metadata]);
   useImperativeHandle(ref, () => ({
     startTransaction() {
       setshowModal(true);
@@ -77,13 +91,8 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
                 ${getChannels(channels)}
                 ${refNumberString}
                 metadata: {
-                custom_fields: [
-                        {
-                        display_name:  '${firstName + ' ' + lastName}',
-                        variable_name:  '${billingName}',
-                        value:''
-                        }
-                ]},
+                  ${mdata}
+                },
                 callback: function(response){
                       var resp = {event:'successful', transactionRef:response};
                         window.ReactNativeWebView.postMessage(JSON.stringify(resp))
@@ -167,7 +176,3 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
 };
 
 export default forwardRef(Paystack);
-
-
-
-
