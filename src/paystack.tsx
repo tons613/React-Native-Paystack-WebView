@@ -24,7 +24,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
-    metadata = {},
+    metadata,
   },
   ref,
 ) => {
@@ -41,7 +41,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     const options = [];
     if (metadata) {
       for (let key in metadata) {
-        let option: any = metadata[key];
+        let option = metadata[key];
         if (option) {
           options.push(`${key}:'${option}'`);
         }
