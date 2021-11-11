@@ -24,7 +24,7 @@ const Paystack: React.ForwardRefRenderFunction<React.ReactNode, PayStackProps> =
     autoStart = false,
     onSuccess,
     activityIndicatorColor = 'green',
-    metadata: {} = {},
+    metadata[], // = {},
   },
   ref,
 ) => {
