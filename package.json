@@ -27,7 +27,6 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "prepare": "yarn compile",
     "test": "jest"
   },
   "devDependencies": {
